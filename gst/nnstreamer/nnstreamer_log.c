@@ -132,3 +132,4 @@ _nnstreamer_error_clean (void)
 
   G_UNLOCK (errlock);
 }
+/* measure: fork-only rebuild marker (same line in both arms) */
