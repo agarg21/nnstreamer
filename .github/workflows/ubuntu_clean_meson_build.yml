@@ -10,6 +10,10 @@ env:
   EXECUTORCH_VERSION: v1.4.1
   EXECUTORCH_PREFIX: /home/runner/executorch-install
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   build:
     name: Build with meson and test with Valgrind in Ubuntu

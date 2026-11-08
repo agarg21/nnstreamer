@@ -50,6 +50,10 @@ env:
   LIBTORCH_VERSION: ${{ inputs.libtorch_version || '2.11.0' }}
   LIBTORCH_SHA256: ${{ inputs.libtorch_sha256 || 'ee3f453f6c3e3d934339875d76a2b04d6a1731554c016fc82be1f4b8d1d4ae62' }}
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   build:
     # The arm64 entry and float16 are in ubuntu_clean_meson_build.yml; this entry
